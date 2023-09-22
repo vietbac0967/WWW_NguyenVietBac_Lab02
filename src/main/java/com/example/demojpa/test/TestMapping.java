@@ -7,12 +7,13 @@ import jakarta.persistence.Persistence;
 
 public class TestMapping {
     public static void main(String[] args) {
-        try (EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("bai02")) {
-            EntityManager entityManager = entityManagerFactory.createEntityManager();
-            EntityTransaction entityTransaction  = entityManager.getTransaction();
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("bai02");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        try {
             entityTransaction.begin();
             entityTransaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
