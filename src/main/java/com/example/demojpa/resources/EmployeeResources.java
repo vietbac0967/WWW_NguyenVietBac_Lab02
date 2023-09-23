@@ -32,7 +32,15 @@ public class EmployeeResources {
     public Response getAll() {
         //paging if possible
         List<Employee> lst = employeeService.getAll();
-        return Response.ok(lst).build();
+        return Response
+                .ok(lst)
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                .header("Access-Control-Max-Age", "1209600")
+                .build();
     }
 
     @POST
@@ -51,6 +59,4 @@ public class EmployeeResources {
             return Response.ok().build();
         return Response.status(Response.Status.NOT_FOUND).build();
     }
-
-
 }

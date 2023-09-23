@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class CustomerRepository {
-    private EntityManager em;
-    private EntityTransaction transaction;
+    private final EntityManager em;
+    private final EntityTransaction transaction;
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     public CustomerRepository() {
@@ -37,7 +37,7 @@ public class CustomerRepository {
             transaction.commit();
             return  true;
         }catch (Exception e){
-            transaction.rollback();;
+            transaction.rollback();
         }
         return false;
     }

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Path("/customers")
 public class CustomerResources {
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     public CustomerResources() {
         customerService = new CustomerService();

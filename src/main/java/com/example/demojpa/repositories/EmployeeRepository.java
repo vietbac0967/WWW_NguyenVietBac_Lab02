@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class EmployeeRepository {
-    private EntityManager em;
-    private EntityTransaction transaction;
+    private final EntityManager em;
+    private final EntityTransaction transaction;
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     public EmployeeRepository() {
