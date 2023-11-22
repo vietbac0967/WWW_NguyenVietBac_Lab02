@@ -30,6 +30,10 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(long id) {
+        this.id = id;
+    }
+
     public Customer(String address, long id, String name, String email, String phone) {
         this.address = address;
         this.id = id;

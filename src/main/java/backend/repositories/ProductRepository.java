@@ -1,19 +1,24 @@
 package backend.repositories;
 
+import backend.dto.Cart;
 import backend.enums.EmployeeStatus;
 import backend.enums.ProductStatus;
 import backend.models.Employee;
 import backend.models.Product;
+import backend.models.ProductPrice;
+import backend.services.ProductPriceService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class ProductRepository {
+    private final ProductPriceService productPriceService = new ProductPriceService();
     private final EntityManager em;
     private final EntityTransaction transaction;
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
@@ -58,5 +63,35 @@ public class ProductRepository {
         return em.createNamedQuery("Product.findAll", Product.class)
                 .setParameter("status", ProductStatus.ACTIVE)
                 .getResultList();
+    }
+
+    public List<Cart> getCartProducts(ArrayList<Cart> cartList) {
+        List<Cart> book = new ArrayList<>();
+        if (!cartList.isEmpty()) {
+            for (Cart item : cartList) {
+                Product product = em.find(Product.class, item.getId());
+                System.out.println(product);
+                Cart row = new Cart();
+                row.setId(item.getId());
+                row.setName(product.getName());
+                row.setDescription(product.getDescription());
+                row.setQuantity(item.getQuantity());
+                double price = productPriceService.getPriceOfProduct(item.getId());
+                row.setPrice(price * item.getQuantity());
+                book.add(row);
+            }
+        }
+        return book;
+    }
+
+    public double getTotalCartPrice(ArrayList<Cart> cartList) {
+        double sum = 0;
+        if (!cartList.isEmpty()) {
+            for (Cart item : cartList) {
+                double price = productPriceService.getPriceOfProduct(item.getId());
+                sum += price * item.getQuantity();
+            }
+        }
+        return sum;
     }
 }

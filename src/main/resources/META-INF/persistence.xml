@@ -9,7 +9,7 @@
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/shopping" />
       <property name="jakarta.persistence.jdbc.user" value="root" />
       <property name="jakarta.persistence.jdbc.password" value="sapassword" />
-      <property name="hibernate.show_sql" value="true"/>
+<!--      <property name="hibernate.show_sql" value="true"/>-->
       <property name="hibernate.format_sql" value="true"/>
       <property name="hibernate.hbm2ddl.auto" value="update" />
       <!-- Specify your JPA dialect (for Hibernate) -->

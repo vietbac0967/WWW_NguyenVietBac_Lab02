@@ -21,10 +21,12 @@
             <a class="nav-link" href="employee-page.jsp">Employee</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">My Cart</a>
+            <a class="nav-link" href="cart.jsp">
+                Cart <span class="badge badge-danger">${cart_list.size()}</span>
+            </a>
         </li>
         <li>
-            <a class="nav-link" href="#">Order</a>
+            <a class="nav-link" href="orders.jsp">Order</a>
         </li>
 
     </ul>

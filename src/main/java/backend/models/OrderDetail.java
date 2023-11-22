@@ -4,6 +4,14 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "order_detail")
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = "OrderDetail.getTotalPrice",
+                        query = "select SUM(od.price) from OrderDetail od where od.order.id =: id"
+                )
+        }
+)
 public class OrderDetail {
     private double quantity;
     private double price;
@@ -66,5 +74,16 @@ public class OrderDetail {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "quantity=" + quantity +
+                ", price=" + price +
+                ", note='" + note + '\'' +
+                ", order=" + order +
+                ", product=" + product +
+                '}';
     }
 }

@@ -1,9 +1,11 @@
 package backend.services;
 
+import backend.dto.Cart;
 import backend.enums.ProductStatus;
 import backend.models.Product;
 import backend.repositories.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +40,10 @@ public class ProductService {
 
     public List<Product> getProducts() {
         return productRepository.getProducts();
+    }
+
+    public List<Cart> getProductByCart(ArrayList<Cart> carts){
+        return productRepository.getCartProducts(carts);
     }
 
 }

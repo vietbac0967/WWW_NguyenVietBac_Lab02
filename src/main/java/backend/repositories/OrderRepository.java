@@ -1,38 +1,41 @@
 package backend.repositories;
 
-import backend.models.ProductPrice;
+import backend.models.Order;
+import backend.models.ProductImage;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Optional;
 
-//@ApplicationScoped
-public class ProductPriceRepository {
+public class OrderRepository {
     private EntityManager em;
     private EntityTransaction transaction;
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
-    public ProductPriceRepository() {
+    public OrderRepository() {
         em = ConnectDB.getInstance().getEntityManagerFactory().createEntityManager();
         transaction = em.getTransaction();
     }
-
-    public void insertProductPrice(ProductPrice productPrice){
+    public void insertOrder(Order order){
         try {
             transaction.begin();
-            em.persist(productPrice);
+            em.persist(order);
             transaction.commit();
         }catch (Exception e){
             transaction.rollback();
             logger.error(e.getMessage());
         }
     }
-
-    public Double getPrice(long productId){
-        return em.createNamedQuery("ProductPrice.getPriceByProductId",Double.class)
-                .setParameter("id",productId)
+    public Optional<Order> getOrderLatest(){
+       Order order =  em.createNamedQuery("Order.getOrderLast", Order.class)
                 .getSingleResult();
+       return Optional.ofNullable(Optional.of(order).orElseThrow(() -> new RuntimeException("Not found")));
+    }
+
+    public List<Order> getAll(){
+        return em.createNamedQuery("Order.getAll",Order.class).getResultList();
     }
 }

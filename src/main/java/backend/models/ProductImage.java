@@ -3,6 +3,11 @@ package backend.models;
 import jakarta.persistence.*;
 
 @Entity
+@NamedQueries(
+        @NamedQuery(
+                name = "ProductImage.getImage",query = "select pi from ProductImage pi where pi.product.id =: id"
+        )
+)
 @Table(name = "product_image")
 public class ProductImage {
     private String alternative;

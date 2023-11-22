@@ -53,6 +53,9 @@ public class Product {
         this.description = description;
     }
 
+    public Product(long productId) {
+    }
+
     public String getUnit() {
         return unit;
     }

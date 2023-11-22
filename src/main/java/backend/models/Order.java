@@ -6,9 +6,22 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = "Order.getOrderLast",
+                        query = "select od from Order od order by orderDate DESC limit 1"
+                ),
+                @NamedQuery(
+                        name = "Order.getAll",
+                        query = "select od from Order od"
+                )
+        }
+
+)
 @Table(name = "orders")
 public class Order {
-    @Column(name = "order_date",columnDefinition = "DATETIME(6)")
+    @Column(name = "order_date", columnDefinition = "DATETIME(6)")
     private LocalDateTime orderDate;
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
@@ -64,4 +77,15 @@ public class Order {
     public void setId(long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderDate=" + orderDate +
+                ", customer=" + customer +
+                ", employee=" + employee +
+                ", id=" + id +
+                '}';
+    }
 }
+

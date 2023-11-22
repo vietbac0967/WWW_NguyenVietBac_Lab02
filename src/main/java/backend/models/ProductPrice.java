@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @Table(name = "product_price")
 @NamedQueries({
         @NamedQuery(
-                name = "ProductPrice.findAllByProductId",
-                query = "select pr from  ProductPrice pr join Product p on p.id = pr.product.id " +
-                        "where pr.product.id =: id"
+                name = "ProductPrice.getPriceByProductId",
+                query = "select price.price FROM ProductPrice price " +
+                        "where product.id =: id order by price.priceDateTime DESC LIMIT 1"
         )
 })
 public class ProductPrice {

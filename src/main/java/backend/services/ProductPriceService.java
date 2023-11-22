@@ -13,7 +13,7 @@ public class ProductPriceService {
         productPriceRepository = new ProductPriceRepository();
     }
 
-    public List<ProductPrice> getAll(long productId){
-        return productPriceRepository.getAll(productId);
+    public Double getPriceOfProduct(long productId){
+        return productPriceRepository.getPrice(productId);
     }
 }

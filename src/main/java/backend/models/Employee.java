@@ -38,7 +38,12 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(LocalDateTime dob, long id, String email, String address, EmployeeStatus employeeStatus, String phone, String fullName) {
+    public Employee(long id) {
+        this.id = id;
+    }
+
+    public Employee(LocalDateTime dob, long id, String email,
+                    String address, EmployeeStatus employeeStatus, String phone, String fullName) {
         this.dob = dob;
         this.id = id;
         this.email = email;
