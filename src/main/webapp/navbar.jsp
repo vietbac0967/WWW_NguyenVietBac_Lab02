@@ -3,6 +3,9 @@
         <li class="nav-item">
             <a class="nav-link " aria-current="page" href="index.jsp">Home</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="dashboard.jsp">Dashboard</a>
+        </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Insert</a>
             <ul class="dropdown-menu">

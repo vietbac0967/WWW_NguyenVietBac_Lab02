@@ -19,8 +19,8 @@
 <%@include file="navbar.jsp" %>
 <div class="container">
     <div class="card-header-my-3">All Order</div>
-    <table class="table table-light">
-        <thead>
+    <table class="table table-hover">
+        <thead class="table-header">
         <tr>
             <th scope="col">Date</th>
             <th scope="col">Price</th>

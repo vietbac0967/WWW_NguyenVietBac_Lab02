@@ -13,9 +13,8 @@ import jakarta.persistence.EntityTransaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ProductRepository {
     private final ProductPriceService productPriceService = new ProductPriceService();
@@ -94,4 +93,11 @@ public class ProductRepository {
         }
         return sum;
     }
+
+    public String getProductNameById(long id){
+        return em.createNamedQuery("Product.getProductByName",String.class)
+                .setParameter("id",id)
+                .getSingleResult();
+    }
+
 }

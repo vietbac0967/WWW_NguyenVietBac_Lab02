@@ -1,17 +1,21 @@
 package backend.repositories;
 
-import backend.models.Order;
 import backend.models.OrderDetail;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
 
 public class OrderDetailRepository {
-    private EntityManager em;
-    private EntityTransaction transaction;
+    private final EntityManager em;
+    private final EntityTransaction transaction;
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     public OrderDetailRepository() {
@@ -44,5 +48,24 @@ public class OrderDetailRepository {
                 .setParameter("id",orderId)
                 .getSingleResult();
     }
+
+    public Map<Long, Double> staticsPriceByProduct() {
+        try {
+            List<Object[]> resultList = em.createNamedQuery("OrderDetail.staticsPriceByProduct")
+                    .getResultList();
+            return resultList.parallelStream()
+                    .collect(Collectors.toMap(
+                            objects -> ((Number) objects[0]).longValue(),
+                            objects -> ((Number) objects[1]).doubleValue(),
+                            (n1, n2) -> n2,
+                            TreeMap::new
+                    ));
+        } catch (PersistenceException | IllegalStateException exception) {
+            // Handle specific exceptions or log the entire exception stack trace
+            System.out.println("Exception occurred: " + exception.getMessage());
+        }
+        return new TreeMap<>();
+    }
+
 
 }

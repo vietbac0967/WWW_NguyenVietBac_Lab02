@@ -7,6 +7,7 @@ import backend.repositories.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class ProductService {
@@ -45,5 +46,6 @@ public class ProductService {
     public List<Cart> getProductByCart(ArrayList<Cart> carts){
         return productRepository.getCartProducts(carts);
     }
+
 
 }

@@ -9,6 +9,14 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(
                 name = "Product.findAll", query = "select p from Product p where p.productStatus =: status"
+        ),
+        @NamedQuery(
+                name = "Product.getProductIdAndNameInProductPrice",
+                query = "SELECT p.id, p.name FROM Product p WHERE p.id IN (SELECT DISTINCT pp.product.id FROM ProductPrice pp)"
+        ),
+        @NamedQuery(
+                name = "Product.getProductByName",
+                query = "select p.name from Product p where p.id =: id"
         )
 })
 public class Product {

@@ -3,7 +3,6 @@ package frontend.controllers;
 import backend.dto.Cart;
 import backend.models.*;
 import backend.repositories.OrderDetailRepository;
-import backend.repositories.ProductRepository;
 import backend.services.OrderService;
 import backend.services.ProductService;
 import jakarta.servlet.ServletException;
@@ -34,7 +33,6 @@ public class CheckOutServlet extends HttpServlet {
             long empId = (long) random.nextInt(10) + 1;
             long customerId = (long) random.nextInt(10) + 1;
             HttpSession session = request.getSession();
-//            ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
             ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
             List<Cart> carts = productService.getProductByCart(cart_list);
             if (carts != null) {
@@ -54,6 +52,7 @@ public class CheckOutServlet extends HttpServlet {
                     System.out.println(orderDetail);
                     orderDetailRepository.insertOrderDetail(orderDetail);
                 }
+                cart_list.clear();
                 response.sendRedirect("orders.jsp");
             } else {
                 response.sendRedirect("cart.jsp");

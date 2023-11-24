@@ -46,6 +46,9 @@ public class Order {
 
     }
 
+    public Order(long orderId) {
+    }
+
     public LocalDateTime getOrderDate() {
         return orderDate;
     }

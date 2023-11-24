@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
                 name = "ProductPrice.getPriceByProductId",
                 query = "select price.price FROM ProductPrice price " +
                         "where product.id =: id order by price.priceDateTime DESC LIMIT 1"
-        )
+        ),
+        @NamedQuery(name = "ProductPrice.getDateAndPriceByProductId", query = "SELECT p.priceDateTime, p.price from ProductPrice p where product.id = :productId")
 })
 public class ProductPrice {
     @ManyToOne
